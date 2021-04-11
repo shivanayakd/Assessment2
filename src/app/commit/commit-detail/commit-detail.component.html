@@ -1,0 +1,25 @@
+<div class="detail" *ngIf="commitDetail; else nodata">
+  <h3>Commit Message :</h3>
+    <p>{{ commitDetail.commit.message }} </p>
+    <div class="expand">
+  <h3>Author :</h3>
+    <p>
+      <img [src]="commitDetail.author.avatar_url" alt="">
+      {{ commitDetail.commit.author.name }} </p>
+    </div>
+    <div class="expand">
+  <h3>Committer :</h3>
+    <p>
+      <img [src]="commitDetail.committer.avatar_url" alt="">
+      {{ commitDetail.commit.committer.name }} </p>
+    </div>
+      <div class="expand">
+  <h3>Commit Timestamp :</h3>
+    <p style="margin-top: 10px;">{{ commitDetail.commit.committer.date }} </p>
+  </div>
+
+</div>
+
+<ng-template #nodata>
+  <h3>Please Select a Commit to View Details</h3>
+</ng-template>

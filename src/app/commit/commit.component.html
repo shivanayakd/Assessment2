@@ -1,0 +1,37 @@
+<ng-container *ngIf="commitsList$ | async as data; else loadingOrError">
+
+  <div class="dataPanel">
+    <ul>
+      <li *ngFor="let commit of data" class="list" [ngClass]="{'active': commit == commitData }" (click)="commitData = commit">
+        <p class="message">{{ commit.commit.message}}</p>
+        <p class="meta">
+          <span style="color: #cc3d3d">{{ commit.commit.author.name}}</span>
+
+          <span style="color: #6666b9">{{ commit.commit.committer.date}}</span>
+        </p>
+
+      </li>
+    </ul>
+    <div class="detial_panel" *ngIf="data.length > 0">
+      <app-commit-detail [commitDetail]="commitData"></app-commit-detail>
+    </div>
+
+  </div>
+
+</ng-container>
+
+<ng-template #loadingOrError>
+  <ng-container *ngIf="errorObject; else loading">
+    <div class="col-12 text-center">
+      <div class="alert alert-danger">
+        {{ errorObject }}
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #loading>
+    <div class="col-12 text-center">
+      Loading ...
+    </div>
+  </ng-template>
+</ng-template>
